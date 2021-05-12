@@ -61,12 +61,12 @@ const getPost = (id) => {
 
 
 // 5
-const getPostAsync = async (data) => {
+const getPostAsync = async (data1) => {
     try {
     const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts/"+ data +"/"
+      "https://jsonplaceholder.typicode.com/posts/"+ data1 +"/"
     );
-    console.log(response.data);
+    console.log(response.data1);
   } catch (err) {
     throw err;
   }
@@ -78,6 +78,19 @@ getPostAsync(50)
 
 
 // ========PRACTICE================ 
+
+// Q1
+const appendToFile = (data) => {
+ 
+fs.appendFile('./data.txt', data, function (err) {
+  if (err) throw err;
+  console.log('Saved!');
+});
+
+};
+
+appendToFile('\n heeeeeeey');
+
 
 
 
