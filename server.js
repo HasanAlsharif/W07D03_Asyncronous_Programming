@@ -89,11 +89,21 @@ fs.appendFile('./data.txt', data, function (err) {
 
 };
 
-appendToFile('\n heeeeeeey');
+// appendToFile('\n heeeeeeey');
 
 
 
+// Q2
+const copyFile = (fileName) => {
+  fs.copyFile("./"+fileName, "copy_of_"+fileName, (err) => {
+    if (err) throw err;
+    
+        console.log("\n done");
 
+  });
+};
+
+copyFile('data.txt');
 
 
 
