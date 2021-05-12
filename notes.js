@@ -28,6 +28,14 @@ in pakage jason -->
     --> npm start //to start the start 
     --> npm run dev //  to run the live server
 
+
+now install the axios 
+make sure you are not running the server
+--> npm install axios
+
+
+
+
 test using    console.log("hi")
 
 
