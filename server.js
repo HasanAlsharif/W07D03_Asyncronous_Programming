@@ -105,7 +105,44 @@ const copyFile = (fileName) => {
 
 copyFile('data.txt');
 
+// Q3
+// the API Expects JSON data to be sent and that's why `JSON.stringify` is used
+const post = JSON.stringify({
+  title: "JavaScript Basics",
+  body: "This post contains information about javaScript ",
+  // the id of the user who is going to create the post
+  userId: 1,
+});
 
+const createPost = (post) => {
+ 
+  axios
+  .get("https://jsonplaceholder.typicode.com/posts")
+  // in `.then()` we add the code for the success
+  .then((response) => {
+    console.log(response.data);
+  })
+  // in `.catch()` we add the code to handel the error
+  .catch((err) => {
+    throw err;
+  });
+
+  axios
+  .post('https://jsonplaceholder.typicode.com/posts', {
+   })
+
+  .then( (response) => {
+    console.log(JSON.parse(response.data));
+  })
+  .catch( (error) => {
+    console.log(error);
+  });
+
+
+
+};
+
+createPost(post);
 
 
 
