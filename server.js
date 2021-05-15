@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const axios = require("axios");
+const { stringify } = require("querystring");
 
 const app = express();
 const port = 3000;
@@ -18,6 +19,10 @@ app.get('/', (req, res) => {
   res.status(200);
   res.json('SERVER IS WORKING');
 });
+
+
+/*
+
 
 // ========PULSE CHECK================ 
 //1 done
@@ -66,7 +71,7 @@ const getPostAsync = async (data1) => {
     const response = await axios.get(
       "https://jsonplaceholder.typicode.com/posts/"+ data1 +"/"
     );
-    console.log(response.data1);
+    console.log(response.data);
   } catch (err) {
     throw err;
   }
@@ -105,7 +110,7 @@ const copyFile = (fileName) => {
 
 copyFile('data.txt');
 
-// Q3
+// Q3 : didnt totally understand the question
 // the API Expects JSON data to be sent and that's why `JSON.stringify` is used
 const post = JSON.stringify({
   title: "JavaScript Basics",
@@ -116,19 +121,35 @@ const post = JSON.stringify({
 
 const createPost = (post) => {
  
-  axios
-  .get("https://jsonplaceholder.typicode.com/posts")
-  // in `.then()` we add the code for the success
-  .then((response) => {
-    console.log(response.data);
+   axios
+  .post(`https://jsonplaceholder.typicode.com/posts/${post.userId}`, {
+   })
+
+  .then( (response) => {
+    console.log(JSON.parse(response.data));
   })
-  // in `.catch()` we add the code to handel the error
-  .catch((err) => {
-    throw err;
+  .catch( (error) => {
+    console.log(error);
   });
 
+};
+
+createPost(post);
+
+
+// Q4 similar to 3 
+const newPost = JSON.stringify({
+  // the post id that we want to update, change it when trying to update another post
+  id: 1,
+  title: "Updated Title",
+  body: "Updated body",
+  userId: 1,
+});
+
+const updatePost = (postId, data) => {
+  
   axios
-  .post('https://jsonplaceholder.typicode.com/posts', {
+  .put(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
    })
 
   .then( (response) => {
@@ -142,7 +163,87 @@ const createPost = (post) => {
 
 };
 
-createPost(post);
+updatePost(1, newPost);
+
+
+
+
+// Q5
+
+const getUsers5 = () => {
+  
+  const getPost5 = async () => {
+  
+    try {
+      const response = await axios.get(
+        `https://jsonplaceholder.typicode.com/users`
+      );
+      console.log(response.data);
+    } catch (err) {
+      throw err;
+    }
+  };
+  
+  getPost5();
+  
+};
+
+
+getUsers5();
+
+*/
+
+// Q6
+const saveUsers = () => {
+  
+  const getPost6 = async () => {
+  
+    let usersdata
+
+    try {
+      const response = await axios.get(
+        `https://jsonplaceholder.typicode.com/users`
+      );
+
+      usersdata = stringify(response.data) 
+      
+    } catch (err) {
+      throw err;
+    }
+
+
+    const writeFile = () => {
+      fs.writeFile("users.txt", usersdata , (err) => {
+        if (err) throw err;
+        });
+    
+    };
+    
+
+    writeFile();
+
+
+
+
+  };
+
+  getPost6();
+
+  
+};
+
+
+saveUsers()
+
+
+
+
+
+
+
+
+
+
 
 
 
